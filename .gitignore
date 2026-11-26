@@ -1,0 +1,36 @@
+# Local configuration, backups and diagnostics
+/keep.json
+/keep.json.bak-*
+/backups/
+/kill.log
+/killer-crash.log
+/killer-plan.json
+/killer-keep-exclude.txt
+/verify-elevated.txt
+/add.bat
+/move.bat
+
+# Build, test and release output
+/artifacts/
+/dist/
+/app.ico
+/*.exe
+/preview-256.png
+/preview-strip.png
+/styles.png
+
+# Local acceptance output and development archives
+/legacy/
+/docs/evidence/
+/docs/Apple-UI-20261016/
+/preview/*
+!/preview/shot.ps1
+!/preview/verify-elevated.ps1
+/UI改版交付报告.md
+
+# Local editor and OS metadata
+/.vs/
+/.vscode/
+*.user
+Thumbs.db
+/.local/

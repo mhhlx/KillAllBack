@@ -1,0 +1,18 @@
+{
+  "system": [
+    "csrss", "wininit", "winlogon", "services", "lsass", "smss", "svchost", "fontdrvhost",
+    "dwm", "explorer", "sihost", "ctfmon", "TextInputHost", "ShellExperienceHost",
+    "StartMenuExperienceHost", "SearchHost", "ShellHost", "RuntimeBroker",
+    "ApplicationFrameHost", "taskhostw", "DllHost", "smartscreen", "WmiPrvSE", "audiodg",
+    "Registry", "Memory Compression", "Secure System", "System", "Idle",
+    "SecurityHealthSystray", "SecurityHealthService"
+  ],
+  "user": [
+    "ghelper", "RtkAudUService64", "TranslucentTB", "CrossDeviceResume", "Pogget",
+    "nvcontainer", "NVDisplay.Container", "NVIDIA Overlay", "nvsphelper64",
+    "nvfvsdksvc_x64", "nvrla", "FvContainer"
+  ],
+  "services": ["Everything"],
+  "graceful": ["Kuajiasu", "KuaijiasuCore", "KuaijiasuHelperService"],
+  "networkRepair": true
+}

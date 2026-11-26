@@ -1,0 +1,2 @@
+# Keep source encoding and line endings byte-for-byte for the Windows compiler.
+* -text whitespace=trailing-space,space-before-tab,cr-at-eol

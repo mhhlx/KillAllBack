@@ -1,0 +1,51 @@
+killer · 一键回到刚开机（内存清理）
+======================================
+
+【解压即用】
+· 整个文件夹可以随意搬动：keep.json 与 kill.log 都生成在程序所在目录。
+· 想让桌面快捷方式指向本目录：运行一次 killer.exe --install-shortcut。
+
+【怎么用】
+1. 首次使用双击“预演和白名单.cmd”，按 UAC 提示授权，查看清理计划。
+2. 在同窗的“白名单”核对保留项。调整后再预演一次，确认哪些应用要保留。
+3. 保存手头工作后双击 killer.exe 开始清理。运行中尝试关窗口会先提示清理仍会继续。
+4. 在结果页查看未完成项及原因、物理内存已用量的前后变化。看完后手动关闭。
+
+【会结束什么】
+白名单之外的用户程序会被结束。请先预演，检查要保留的应用及其相关进程。
+白名单保存在本地 keep.json，可参考 keep.example.json。
+想保留某个程序：把它的进程名或路径片段加进 keep.json 的 user 数组。
+刚关闭的应用可以在清理结果行点“下次保留”。完整 exe 路径立即保存，下次清理会跳过该文件的所有实例，最近一次添加可在原处撤销。
+也可以在同一窗口切到“白名单”搜索运行中的应用，或运行 killer.exe --keep-editor 直接打开白名单。
+配置读取或校验失败时，本轮清理会停止。请检查同目录的 keep.json 或备份。
+
+· 条目写法（v1.1.1-dev 起）：只写进程名 = 只按进程名全等匹配（大小写不敏感，可带 .exe）；
+  含 \ / : 的写法 = 按路径子串匹配，例如 "C:\Apps\Example"。
+  精确文件规则以 exe= 开头，目录规则以 dir= 开头，后面都需要完整路径。
+  注意：以前所有条目都当路径子串用，默认名单里的 "System" 会连 System32 一整套
+  （notepad / cmd / taskmgr / regedit）一起放行，那个 bug 已经修掉。
+
+【附带动作】
+· 网络自检：清理结束后只读检测。发现可修问题时，可展开网络详情并确认“修复网络…”。PAC 自动代理脚本仅诊断。
+· 服务停止：临时停止 keep.json 的 services 里指定的服务（默认 Everything），服务启动类型照常生效。
+· 优雅关闭：graceful 中的程序会先收到正常关闭消息，等待时间由清理的 3 秒共享预算决定。
+
+【文件说明】
+killer.exe      主程序（自带管理员清单，双击即用）
+预演和白名单.cmd  双击查看预演及白名单
+keep.json       白名单 / 服务 / 优雅关闭 配置，改完即生效，无需重编译
+app.ico         图标资源（已内嵌进 exe）
+keep.example.json  默认配置示例
+README.md       完整说明：参数、复检、回滚、界面规范
+AGENTS.md / docs\  AI 接手指南（架构、验收、已知问题、路线图）
+killall-back.cs / ui.cs / make-icon.cs / build.ps1   源码与构建脚本（就在本目录，可重新编译）
+kill.log        运行日志（首次运行后生成；纯追加，超过 512 KB 自动只留最近 20 次）
+
+【常用参数】
+killer.exe --dry-run                 预演，只列清单不动手
+killer.exe --dry-run --silent        预演且不弹窗
+killer.exe --screenshot out.png      把预演界面渲染成图片（用于检查排版）
+killer.exe --scan-only               只扫描并把计划 / 白名单命中来源写成文件，不动任何进程
+killer.exe --check-config            只校验 keep.json 并退出
+killer.exe --install-shortcut        重新创建桌面快捷方式
+killer.exe --version                 显示编译进程序的版本
